@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Romario\\source\\repos\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj": {}
+    "C:\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Romario\\source\\repos\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj": {
+    "C:\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Romario\\source\\repos\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj",
+        "projectUniqueName": "C:\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj",
         "projectName": "ClienteTeste",
-        "projectPath": "C:\\Users\\Romario\\source\\repos\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj",
-        "packagesPath": "C:\\Users\\Romario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Romario\\source\\repos\\ClienteTeste\\ClienteTeste\\obj\\",
+        "projectPath": "C:\\ClienteTeste\\ClienteTeste\\ClienteTeste.csproj",
+        "packagesPath": "C:\\Users\\romario.souza\\.nuget\\packages\\",
+        "outputPath": "C:\\ClienteTeste\\ClienteTeste\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Romario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\romario.souza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

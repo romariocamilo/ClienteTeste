@@ -9,59 +9,124 @@ namespace ClienteTeste.Cliente
 {
     public class Controla_Conexao
     {
+        TcpClient conexao;
         NetworkStream sockStream;
         BinaryWriter escreve;
         BinaryReader ler;
-        string usuario = "ricardo";
-        //Queue<string> filaMensagensChat = new Queue<string>();
-        //Queue<string> filaMensagensConexao = new Queue<string>();
+        string usuario = "herbert";
+        Queue<string> filaMensagensChat = new Queue<string>();
+        Queue<string> filaMensagensConexao = new Queue<string>();
+        bool autenticado = false;
         public void ConectaServidor()
         {
             bool primeiroAcesso = true;
-            TcpClient conexao = new TcpClient("127.0.0.1", 8080);
 
             while (true)
             {
-                sockStream = conexao.GetStream();
-                escreve = new BinaryWriter(sockStream);
-                ler = new BinaryReader(sockStream);
-
                 try
                 {
-                    if (primeiroAcesso)
+                    if (conexao == null)
                     {
-                        escreve.Write("login|" + usuario);
-                        primeiroAcesso = false;
-                        string mensagem = ler.ReadString();
-                        Console.WriteLine(mensagem);
+                        conexao = new TcpClient("10.1.9.184", 8080);
+                        Console.WriteLine("Para enviar mensagem para um usuários digite: nome do usuário: conteúdo da mensagem");
+                        Console.WriteLine("Para enviar mensagem para todoas usuários digite: all: conteúdo da mensagem");
+                        Console.WriteLine("Para solicitar a lista de usuários ativos digite: requisicao: usuarios online");
+                        Console.WriteLine("Para limpar o console digite: cls \n");
                     }
-                    else
+
+
+                    sockStream = conexao.GetStream();
+                    escreve = new BinaryWriter(sockStream);
+                    ler = new BinaryReader(sockStream);
+
+                    try
                     {
-                        //Console.WriteLine("Aguardando mensagem do servidor");
-                        string mensagem = ler.ReadString();
-                        if (mensagem != "ping")
+                        if (primeiroAcesso)
                         {
-                            Console.WriteLine(mensagem);
+                            escreve.Write("login|" + usuario);
+                            primeiroAcesso = false;
+                            string mensagem = ler.ReadString();
+
+                            if (mensagem == "autenticado")
+                            {
+                                Console.WriteLine(usuario + " " + mensagem);
+                                autenticado = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Usuário não autenticado");
+                                autenticado = false;
+                            }
+                        }
+                        else
+                        {
+                            string mensagem = ler.ReadString();
+
+                            if (mensagem == "ping")
+                            {
+                                filaMensagensConexao.Enqueue(mensagem);
+                            }
+                            else
+                            {
+                                filaMensagensChat.Enqueue(mensagem);
+                            }
+
+                            if (mensagem != "ping")
+                            {
+                                Console.WriteLine(filaMensagensChat.Dequeue());
+                            }
                         }
                     }
+                    catch
+                    {
+                        Console.WriteLine("Servidor Offline");
+                        autenticado = false;
+                        conexao = null;
+                        Thread.Sleep(1000);
+                        continue;
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Login Inválido");
+                    Console.WriteLine("Servidor Offline");
+                    autenticado = false;
+                    conexao = null;
+                    Thread.Sleep(1000);
+                    continue;
                 }
             }
         }
-
         public void EnviaMensagemChat()
         {
-            Console.WriteLine("Digite a mensagem: destinátario|conteúdo");
             while (true)
             {
-                if (escreve != null)
+                if (autenticado)
                 {
-                    string[] mensagem = Console.ReadLine().Split('|');
 
-                    escreve.Write(usuario + "|chat|" + mensagem[1] + "|" + mensagem[0]);
+                    if (escreve != null)
+                    {
+                        string[] mensagem = Console.ReadLine().ToLowerInvariant().Trim().Split(':');
+
+                        if (mensagem.Length == 2)
+                        {
+                            if (mensagem[0] == "requisicao")
+                            {
+                                escreve.Write(usuario + "|requisicao|" + mensagem[1] + "|" + usuario);
+                            }
+                            else
+                            {
+                                escreve.Write(usuario + "|chat|" + mensagem[1] + "|" + mensagem[0]);
+                            }
+                        }
+                        else if (mensagem[0] == "cls")
+                        {
+                            LimpaConsole(mensagem[0]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Mensagem fora do padrão");
+                        }
+                    }
                 }
             }
         }
@@ -69,13 +134,51 @@ namespace ClienteTeste.Cliente
         {
             while (true)
             {
-                if (escreve != null)
+                if (autenticado)
                 {
-                    escreve.Write(usuario + "|conexao|pong|" + usuario);
-                }
+                    bool primeiro = true;
 
-                Thread.Sleep(8000);
+                    try
+                    {
+                        if (escreve != null)
+                        {
+                            if (primeiro == true)
+                            {
+                                escreve.Write(usuario + "|conexao|pong|" + usuario);
+                                primeiro = false;
+                            }
+                            else
+                            {
+                                if (filaMensagensConexao.Count > 0)
+                                {
+                                    escreve.Write(usuario + "|conexao|pong|" + usuario);
+                                    filaMensagensConexao.Dequeue();
+                                }
+                            }
+                        }
+
+                        Thread.Sleep(8000);
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
             }
         }
+        public void LimpaConsole(string mensagem)
+        {
+            if (mensagem == "cls")
+            {
+                Console.Clear();
+            }
+
+            Console.WriteLine(usuario);
+            Console.WriteLine("Para enviar mensagem para um usuários digite: nome do usuário: conteúdo da mensagem");
+            Console.WriteLine("Para enviar mensagem para todoas usuários digite: all: conteúdo da mensagem");
+            Console.WriteLine("Para solicitar a lista de usuários ativos digite: requisicao: usuarios online");
+            Console.WriteLine("Para limpar o console digite: cls \n");
+        }
+
     }
 }
