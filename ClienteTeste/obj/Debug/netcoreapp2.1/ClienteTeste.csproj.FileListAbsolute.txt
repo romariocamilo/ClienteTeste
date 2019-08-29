@@ -1,0 +1,11 @@
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\bin\Debug\netcoreapp2.1\ClienteTeste.deps.json
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\bin\Debug\netcoreapp2.1\ClienteTeste.runtimeconfig.json
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\bin\Debug\netcoreapp2.1\ClienteTeste.runtimeconfig.dev.json
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\bin\Debug\netcoreapp2.1\ClienteTeste.dll
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\bin\Debug\netcoreapp2.1\ClienteTeste.pdb
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.csprojAssemblyReference.cache
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.csproj.CoreCompileInputs.cache
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.AssemblyInfoInputs.cache
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.AssemblyInfo.cs
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.dll
+C:\Users\Romario\source\repos\ClienteTeste\ClienteTeste\obj\Debug\netcoreapp2.1\ClienteTeste.pdb
