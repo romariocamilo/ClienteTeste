@@ -187,22 +187,18 @@ namespace ClienteTeste.Cliente
             {
                 primeiroAcesso = true;
                 logado = false;
-                Console.WriteLine("Digite o usuário: ");
-                string usuarioFixo = Console.ReadLine();
+                //Console.WriteLine("Digite o usuário: ");
+                //string usuarioFixo = Console.ReadLine();
 
                 while (true)
                 {
-                    usuario = usuarioFixo;
+                    usuario = "romario";
                     //Console.WriteLine("Conecta servidor rodando");
-
-                    Thread.Sleep(1000);
                     try
                     {
                         if (primeiroAcesso)
                         {
-                            Console.Clear();
-                            conexao = new TcpClient("192.168.100.5", 8080);
-
+                            conexao = new TcpClient("10.1.9.184", 8080);
                             sockStream = conexao.GetStream();
                             escreve = new BinaryWriter(sockStream);
                             ler = new BinaryReader(sockStream);
@@ -244,6 +240,7 @@ namespace ClienteTeste.Cliente
                             if (mensagemServidor.ToLowerInvariant() == "autenticado" && usuario != null)
                             {
                                 logado = true;
+                                Console.Clear();
                                 Console.WriteLine(usuario + " autenticado \n");
 
                                 Console.WriteLine("Para enviar mensagem para um usuários digite: nome do usuário: conteúdo da mensagem");
