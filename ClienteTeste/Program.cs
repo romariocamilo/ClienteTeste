@@ -10,15 +10,26 @@ namespace ClienteTeste
         {
             Controla_Conexao objetoCC = new Controla_Conexao();
 
-            Thread ligaServidor = new Thread(new ThreadStart(objetoCC.ConectaServidor));
-            ligaServidor.Start();
+            Thread conectaServidor = new Thread(new ThreadStart(objetoCC.ConectaServidor));
+            conectaServidor.Name = "Conecta no Servidor";
+            conectaServidor.Start();
 
-            Thread.Sleep(2000);
-            Thread enviaMensagem = new Thread(new ThreadStart(objetoCC.EnviaMensagemChat));
-            enviaMensagem.Start();
+            Thread.Sleep(3000);
+            Thread escutaMenagens = new Thread(new ThreadStart(objetoCC.EscutaMensagem));
+            escutaMenagens.Name = "Escuta Mensagens";
+            escutaMenagens.Start();
 
-            Thread enviaMensagemConexao = new Thread(new ThreadStart(objetoCC.EnviaMensagemConexao));
-            enviaMensagemConexao.Start();
+            Thread testaConexao = new Thread(new ThreadStart(objetoCC.TestaConexao));
+            testaConexao.Name = "Testa Conexão";
+            testaConexao.Start();
+
+            Thread descarregaMensagens = new Thread(new ThreadStart(objetoCC.DescarregaMensagensChat));
+            descarregaMensagens.Name = "Descarrega Mensagens";
+            descarregaMensagens.Start();
+
+            Thread escreveMensagens = new Thread(new ThreadStart(objetoCC.EscreveMensagem));
+            escreveMensagens.Name = "Escreve Mensagens";
+            escreveMensagens.Start();
         }
     }
 }
