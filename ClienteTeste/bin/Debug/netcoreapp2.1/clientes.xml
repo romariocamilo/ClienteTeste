@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Cliente xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ClienteId>1</ClienteId>
+  <Apelido>romario</Apelido>
+  <Logado>false</Logado>
+</Cliente>

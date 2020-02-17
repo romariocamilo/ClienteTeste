@@ -185,6 +185,8 @@ namespace ClienteTeste.Cliente
         {
             try
             {
+                Controla_XML oControla_XML = new Controla_XML();
+
                 primeiroAcesso = true;
                 logado = false;
                 //Console.WriteLine("Digite o usuário: ");
@@ -192,7 +194,8 @@ namespace ClienteTeste.Cliente
 
                 while (true)
                 {
-                    usuario = "romario";
+                    oControla_XML.ExcreveXML();
+                    usuario = oControla_XML.LeXML().Apelido;
                     //Console.WriteLine("Conecta servidor rodando");
                     try
                     {
